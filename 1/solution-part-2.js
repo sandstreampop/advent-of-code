@@ -13,8 +13,6 @@ const chunkedLines = ((lines, chunkSize) => {
   return result;
 })(lines, 3);
 
-console.log(chunkedLines);
-
 const { answer } = chunkedLines.reduce(
   ({ answer, lastChunk }, currentChunk) => ({
     answer:
