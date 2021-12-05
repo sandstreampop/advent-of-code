@@ -1,12 +1,19 @@
 export function Solution2(input) {
   const lines = input.split("\n");
 
-  const oxygenGeneratorRating = applyBitCriteria(lines, { preferMajority: true, preferZero: false });
-  const c02ScrubberRating = applyBitCriteria(lines, { preferMajority: false, preferZero: true })
+  const oxygenGeneratorRating = applyBitCriteria(lines, {
+    preferMajority: true,
+    preferZero: false,
+  });
+  const c02ScrubberRating = applyBitCriteria(lines, {
+    preferMajority: false,
+    preferZero: true,
+  });
 
-	const answer = parseInt(oxygenGeneratorRating, 2) * parseInt(c02ScrubberRating, 2);
+  const answer =
+    parseInt(oxygenGeneratorRating, 2) * parseInt(c02ScrubberRating, 2);
 
-	return answer;
+  return answer;
 }
 
 function applyBitCriteria(lines, options, i = 0) {
@@ -15,11 +22,17 @@ function applyBitCriteria(lines, options, i = 0) {
   const [zeroAtIndex, oneAtIndex] = split(lines, i);
 
   const sameLength = zeroAtIndex.length === oneAtIndex.length;
-	const tieBreaker = options.preferZero ? zeroAtIndex : oneAtIndex;
-  const majority = zeroAtIndex.length > oneAtIndex.length ? zeroAtIndex : oneAtIndex;
-	const minority = zeroAtIndex.length > oneAtIndex.length ? oneAtIndex : zeroAtIndex;
-	
-	const selectedLines = sameLength ? tieBreaker : options.preferMajority ? majority : minority;
+  const tieBreaker = options.preferZero ? zeroAtIndex : oneAtIndex;
+  const majority =
+    zeroAtIndex.length > oneAtIndex.length ? zeroAtIndex : oneAtIndex;
+  const minority =
+    zeroAtIndex.length > oneAtIndex.length ? oneAtIndex : zeroAtIndex;
+
+  const selectedLines = sameLength
+    ? tieBreaker
+    : options.preferMajority
+    ? majority
+    : minority;
   return applyBitCriteria(selectedLines, options, i + 1);
 }
 

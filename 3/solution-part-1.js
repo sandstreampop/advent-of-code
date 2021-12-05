@@ -25,5 +25,5 @@ function mostAndLeastCommonReducer(result, value) {
 }
 
 function powerConsumptionReducer(result, value) {
-	return result * parseInt(value, 2);
+  return result * parseInt(value, 2);
 }
