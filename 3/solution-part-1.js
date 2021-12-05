@@ -1,16 +1,10 @@
 export function Solution1(input) {
-  const { mostCommon, leastCommon } = input
+  return input
     .replaceAll("\n", "")
     .split("")
     .reduce(verticalLinesReducer, [])
-    .reduce(countReducer, { mostCommon: "", leastCommon: "" });
-
-  const gammaRate = parseInt(mostCommon, 2);
-  const epsilonRate = parseInt(leastCommon, 2);
-
-  const powerConsumption = gammaRate * epsilonRate;
-
-  return powerConsumption;
+    .reduce(mostAndLeastCommonReducer, ["", ""])
+    .reduce(powerConsumptionReducer, 1);
 }
 
 function verticalLinesReducer(result, value, i) {
@@ -20,12 +14,16 @@ function verticalLinesReducer(result, value, i) {
   return result;
 }
 
-function countReducer(result, value) {
+function mostAndLeastCommonReducer(result, value) {
   const zeroesCount = value.filter((val) => val === "0").length;
   const onesCount = value.filter((val) => val === "1").length;
 
-  result.mostCommon += Number(onesCount > zeroesCount);
-  result.leastCommon += Number(zeroesCount > onesCount);
+  result[0] += Number(onesCount > zeroesCount);
+  result[1] += Number(zeroesCount > onesCount);
 
   return result;
+}
+
+function powerConsumptionReducer(result, value) {
+	return result * parseInt(value, 2);
 }
