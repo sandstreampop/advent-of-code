@@ -33,6 +33,7 @@ function applyBitCriteria(lines, options, i = 0) {
     : options.preferMajority
     ? majority
     : minority;
+
   return applyBitCriteria(selectedLines, options, i + 1);
 }
 
